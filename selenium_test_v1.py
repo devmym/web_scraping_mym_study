@@ -19,4 +19,4 @@ keyword.send_keys('-')
 driver.find_element_by_xpath('//*[@id="submit"]').click()
 
 
-
+c_url = print(driver.current_url)
