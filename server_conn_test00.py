@@ -1,6 +1,7 @@
 import MySQLdb 
 import requests 
 from bs4 import BeautifulSoup 
+import numpy as np
 
 if __name__ == "__main__": 
     RANK = 100 
@@ -23,6 +24,9 @@ if __name__ == "__main__":
     for s in singers: 
         singer.append(s.find('span', {"class": "checkEllipsis"}).text) 
         items = [item for item in zip(title, singer)] 
+        print(type(items))
+        print(np.shape(items))
+        print(items)
 
 conn = MySQLdb.connect( user="scraper", passwd="password", host="localhost", db="scraping") # charset="utf-8"
 
