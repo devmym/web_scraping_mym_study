@@ -21,20 +21,19 @@ import pandas as pd
 # writer = csv.writer(f)
 
 
-#mysql 서버를 만든다.
+# #mysql 서버를 만든다.
 
-conn = MySQLdb.connect( user="scraper", passwd="password", host="localhost", db="scraping") # charset="utf-8"
+# conn = MySQLdb.connect( user="root", passwd="mysql", host="localhost", db="scraping") # charset="utf-8"
 
-# 커서 생성 
-cursor = conn.cursor() 
+# # 커서 생성 
+# cursor = conn.cursor() 
 
-# 실행할 때마다 다른값이 나오지 않게 테이블을 제거해두기 
-cursor.execute("DROP TABLE IF EXISTS car") 
+# # 실행할 때마다 다른값이 나오지 않게 테이블을 제거해두기 
+# cursor.execute("DROP TABLE IF EXISTS car") 
 
-# 테이블 생성하기 
-# cursor.execute("CREATE TABLE car (code text, kor text, eng text, price text)")
-cursor.execute("CREATE TABLE car (code text)") 
-i = 1 
+# # 테이블 생성하기 
+# cursor.execute("CREATE TABLE car (code text kor text eng text)") 
+# i = 1 
 
 
 
@@ -49,24 +48,8 @@ for i in range(1, 4):
 
     datas = parse.find("tbody").find_all("tr")
 
-    #결과를 result 리스트에 저장
-    result = []
-
     for data in datas:
-        ds = data.find_all('td')
-        for d in ds:
-            row = d.text
-            print(row)
-            #차라리 이부분에서 바로바로 서버로 보낸다면 ? 
-            sql = "INSERT INTO car(code) VALUES(%s)"
-            VALUES = ()
-            cursor.execute("INSERT INTO car(code) VALUES(%s)")
-            
-
-# 서버에 바로 저장 코드 추가
-
-# 커밋하기 
-conn.commit() 
-# 연결종료하기 
-conn.close()
-
+        tds = data.find_all('td')
+        result =[]
+        result.append(tds)
+        
